@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
-import {
-  HiOutlineCloudArrowDown,
-  HiOutlineDocumentText,
-  HiOutlinePlus,
-} from "react-icons/hi2";
+import { HiOutlinePlus } from "react-icons/hi2";
 import TableSantri from "../partials/TableSantri";
 import ModalCreateSantri from "../partials/ModalCreateSantri";
 

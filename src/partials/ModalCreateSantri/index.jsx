@@ -38,7 +38,7 @@ function ModalCreateSantri({ openCreateModal, setOpenCreateModal }) {
                   <div className="flex justify-between items-center">
                     <Dialog.Title
                       as="h3"
-                      className="text-lg font-medium leading-6 text-gray-900"
+                      className="text-lg font-medium leading-6 text-gray-900 uppercase"
                     >
                       Tambah Data Santri
                     </Dialog.Title>
@@ -51,7 +51,9 @@ function ModalCreateSantri({ openCreateModal, setOpenCreateModal }) {
                   </div>
                   <div className="mt-4">
                     <div className="mb-3">
-                      <label htmlFor="fullname">Nama Lengkap</label>
+                      <label htmlFor="fullname" className="uppercase text-sm">
+                        Nama Lengkap
+                      </label>
                       <input
                         type="text"
                         className="form-control"
@@ -60,7 +62,9 @@ function ModalCreateSantri({ openCreateModal, setOpenCreateModal }) {
                     </div>
 
                     <div className="mb-3">
-                      <label htmlFor="role">Halaqoh</label>
+                      <label htmlFor="role" className="uppercase text-sm">
+                        Halaqoh
+                      </label>
                       <select name="role" id="role" className="form-control">
                         <option hidden>Pilih</option>
                         <option value="1">1</option>
@@ -72,15 +76,17 @@ function ModalCreateSantri({ openCreateModal, setOpenCreateModal }) {
                     </div>
 
                     <div className="mb-3">
-                      <label htmlFor="">Asal</label>
-                      <input type="text" className="form-control" />
+                      <label htmlFor="from" className="uppercase text-sm">
+                        Asal
+                      </label>
+                      <input type="text" className="form-control" id="from" />
                     </div>
                   </div>
 
                   <div className="mt-5">
                     <button
                       type="button"
-                      className="inline-block w-full justify-center rounded-md border border-transparent bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 uppercase"
+                      className="inline-block w-full justify-center rounded-md border border-transparent bg-sky-400 px-4 py-3 text-sm font-medium text-white hover:bg-sky-500 focus:outline-none uppercase"
                     >
                       Submit
                     </button>
