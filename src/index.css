@@ -8,3 +8,7 @@ body {
   font-family: "Montserrat", sans-serif;
   /* font-family: "Roboto", sans-serif; */
 }
+
+.form-control {
+  @apply border border-slate-300 w-full py-2 px-2 rounded focus:outline-none focus:border-slate-500 focus:border;
+}

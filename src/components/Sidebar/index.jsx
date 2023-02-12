@@ -22,7 +22,7 @@ function Sidebar({ openSidebar }) {
         </h6>
       </div>
 
-      <ul className="mt-40 flex flex-col items-center gap-16">
+      <ul className="mt-40 flex flex-col items-center justify-between h-96">
         <li className="grid place-items-center group">
           <NavLink
             to="/dashboard"

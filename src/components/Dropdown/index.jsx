@@ -10,7 +10,7 @@ export default function Dropdown() {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
-        <Menu.Button className="inline-flex w-full uppercase justify-center rounded-md bg-white px-4 py-2 text-sm font-medium text-gray-700 focus:outline-none items-center">
+        <Menu.Button className="inline-flex w-full uppercase justify-center rounded-md bg-white px-4 py-2 text-xs lg:text-sm font-medium text-gray-700 focus:outline-none items-center">
           Fayha Zhafiratul Marwa
           <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
         </Menu.Button>
@@ -33,7 +33,7 @@ export default function Dropdown() {
                   href="#!"
                   className={classNames(
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm uppercase"
+                    "block px-4 py-2 text-xs lg:text-sm uppercase"
                   )}
                 >
                   Profile
@@ -46,7 +46,7 @@ export default function Dropdown() {
                   href="#!"
                   className={classNames(
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm uppercase"
+                    "block px-4 py-2 text-xs lg:text-sm uppercase"
                   )}
                 >
                   Setting
@@ -59,7 +59,7 @@ export default function Dropdown() {
                   type="submit"
                   className={classNames(
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block w-full px-4 py-2 text-left text-sm uppercase"
+                    "block w-full px-4 py-2 text-left text-xs lg:text-sm uppercase"
                   )}
                 >
                   Sign out
