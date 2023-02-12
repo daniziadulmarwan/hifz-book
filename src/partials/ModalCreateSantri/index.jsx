@@ -1,8 +1,32 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { HiOutlineXMark } from "react-icons/hi2";
+import axios from "axios";
+import { BASE_URL } from "../../config/api";
+import { toast } from "react-toastify";
 
 function ModalCreateSantri({ openCreateModal, setOpenCreateModal }) {
+  const [name, setName] = useState("");
+  const [halaqoh, setHalaqoh] = useState("");
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post(`${BASE_URL}/createSantri`, { name, halaqoh })
+      .then((res) => {
+        toast.success(res.data.msg, { autoClose: 2000 });
+        setName("");
+        setHalaqoh("");
+        setOpenCreateModal(false);
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      })
+      .catch((err) => {
+        toast(err.message);
+      });
+  };
+
   return (
     <>
       <Transition appear show={openCreateModal} as={Fragment}>
@@ -58,6 +82,8 @@ function ModalCreateSantri({ openCreateModal, setOpenCreateModal }) {
                         type="text"
                         className="form-control"
                         id="fullname"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                       />
                     </div>
 
@@ -65,7 +91,13 @@ function ModalCreateSantri({ openCreateModal, setOpenCreateModal }) {
                       <label htmlFor="role" className="uppercase text-sm">
                         Halaqoh
                       </label>
-                      <select name="role" id="role" className="form-control">
+                      <select
+                        name="role"
+                        id="role"
+                        className="form-control"
+                        value={halaqoh}
+                        onChange={(e) => setHalaqoh(e.target.value)}
+                      >
                         <option hidden>Pilih</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -75,16 +107,17 @@ function ModalCreateSantri({ openCreateModal, setOpenCreateModal }) {
                       </select>
                     </div>
 
-                    <div className="mb-3">
+                    {/* <div className="mb-3">
                       <label htmlFor="from" className="uppercase text-sm">
                         Asal
                       </label>
                       <input type="text" className="form-control" id="from" />
-                    </div>
+                    </div> */}
                   </div>
 
                   <div className="mt-5">
                     <button
+                      onClick={onSubmit}
                       type="button"
                       className="inline-block w-full justify-center rounded-md border border-transparent bg-sky-400 px-4 py-3 text-sm font-medium text-white hover:bg-sky-500 focus:outline-none uppercase"
                     >
