@@ -1,6 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function SignIn() {
+  const navigate = useNavigate();
+
+  const onSubmit = () => {
+    navigate("/dashboard");
+  };
+
   return (
     <div className="h-screen w-full flex overflow-y-hidden">
       <div className="w-full px-5 lg:px-0 lg:w-1/2 h-full flex justify-center items-center">
@@ -26,6 +33,7 @@ export default function SignIn() {
             </div>
             <div className="mb-3">
               <button
+                onClick={onSubmit}
                 type="button"
                 className="w-full py-2 px-4 rounded uppercase bg-blue-600 text-white hover:bg-blue-500"
               >
