@@ -136,13 +136,15 @@ function TableSantri() {
               </tbody>
             </table>
           </div>
-          <ModalEditSantri
-            id={id}
-            openModalEditSantri={openModalEditSantri}
-            setOpenModalEditSantri={setOpenModalEditSantri}
-          />
         </div>
       </div>
+      {openModalEditSantri && (
+        <ModalEditSantri
+          id={id}
+          openModalEditSantri={openModalEditSantri}
+          setOpenModalEditSantri={setOpenModalEditSantri}
+        />
+      )}
     </div>
   );
 }
