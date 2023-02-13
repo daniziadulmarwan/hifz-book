@@ -6,9 +6,13 @@ import { BASE_URL } from "../../config/api";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";
+import ModalEditSantri from "../ModalEditSantri";
 
 function TableSantri() {
   const [datas, setDatas] = useState([]);
+  const [id, setId] = useState("");
+
+  const [openModalEditSantri, setOpenModalEditSantri] = useState(false);
 
   const fetchAllData = () => {
     axios.get(`${BASE_URL}/getAllSantri`).then((res) => {
@@ -42,6 +46,11 @@ function TableSantri() {
         },
       ],
     });
+  };
+
+  const onOpenEditModal = (id) => {
+    setId(id);
+    setOpenModalEditSantri(true);
   };
 
   return (
@@ -100,7 +109,10 @@ function TableSantri() {
                       Indonesia
                     </td>
                     <td className="text-base flex gap-2 text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      <button className="bg-sky-200 rounded w-9 h-9 grid place-items-center text-white text-sm uppercase font-medium">
+                      <button
+                        onClick={() => onOpenEditModal(data.id)}
+                        className="bg-sky-200 rounded w-9 h-9 grid place-items-center text-white text-sm uppercase font-medium"
+                      >
                         <HiPencil size={20} className="text-sky-500" />
                       </button>
                       <button
@@ -124,6 +136,11 @@ function TableSantri() {
               </tbody>
             </table>
           </div>
+          <ModalEditSantri
+            id={id}
+            openModalEditSantri={openModalEditSantri}
+            setOpenModalEditSantri={setOpenModalEditSantri}
+          />
         </div>
       </div>
     </div>
