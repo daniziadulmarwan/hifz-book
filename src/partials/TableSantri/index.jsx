@@ -122,7 +122,7 @@ function TableSantri() {
                         <HiTrash size={20} className="text-red-500" />
                       </button>
                       <NavLink
-                        to="/santri/detail"
+                        to={`/santri/hfiz/${data._id}`}
                         className="bg-green-200 rounded w-9 h-9 grid place-items-center text-white text-sm uppercase font-medium"
                       >
                         <HiArrowRightCircle
