@@ -1,17 +1,50 @@
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import jwtDecode from "jwt-decode";
+import { confirmAlert } from "react-confirm-alert";
+import { BASE_URL } from "../../config/api";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Dropdown() {
+  const token = jwtDecode(localStorage.getItem("token"));
+  const navigate = useNavigate();
+
+  const onSignout = () => {
+    confirmAlert({
+      title: "Confirm to submit",
+      message: "Are you sure want logout",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => {
+            axios.defaults.headers.common = {
+              Authorization: `bearer ${localStorage.getItem("token")}`,
+            };
+            axios.delete(`${BASE_URL}/auth/signout`).then((res) => {
+              localStorage.removeItem("token");
+              navigate("/");
+            });
+          },
+        },
+        {
+          label: "No",
+          onClick: () => {},
+        },
+      ],
+    });
+  };
+
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
         <Menu.Button className="inline-flex w-full uppercase justify-center rounded-md bg-white px-4 py-2 text-xs lg:text-sm font-medium text-gray-700 focus:outline-none items-center">
-          Fayha Zhafiratul Marwa
+          {token.name}
           <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
         </Menu.Button>
       </div>
@@ -56,7 +89,8 @@ export default function Dropdown() {
             <Menu.Item>
               {({ active }) => (
                 <button
-                  type="submit"
+                  type="button"
+                  onClick={onSignout}
                   className={classNames(
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                     "block w-full px-4 py-2 text-left text-xs lg:text-sm uppercase"

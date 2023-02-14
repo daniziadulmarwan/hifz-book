@@ -15,10 +15,29 @@ function TableSantri() {
   const [openModalEditSantri, setOpenModalEditSantri] = useState(false);
 
   const fetchAllData = () => {
+    axios.defaults.headers.common = {
+      Authorization: `bearer ${localStorage.getItem("token")}`,
+    };
     axios.get(`${BASE_URL}/santri/getAllSantri`).then((res) => {
       setDatas(res.data.data);
     });
   };
+
+  // const refreshToken = async () => {
+  //   try {
+  //     const res = await axios.get(`${BASE_URL}/auth/refresh-token`);
+  //     localStorage.setItem("token", res.data.refreshToken);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // axios.interceptors.request.use(async (config) => {
+  //   const currentDate = new Date();
+  //   if (token.exp * 1000 < currentDate.getTime()) {
+  //     refreshToken();
+  //   }
+  // });
 
   useEffect(() => {
     fetchAllData();
@@ -58,7 +77,7 @@ function TableSantri() {
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="py-4 inline-block min-w-full sm:px-6 lg:px-8">
           <div className="overflow-hidden">
-            <table className="min-w-full text-center border-t border-slate-200">
+            <table className="min-w-full text-center border-t border-slate-200 roboto-font">
               <thead className="border-b bg-gray-100">
                 <tr>
                   <th

@@ -85,7 +85,7 @@ function ModalEditSantri({ openModalEditSantri, setOpenModalEditSantri, id }) {
                       <HiOutlineXMark size={18} />
                     </button>
                   </div>
-                  <div className="mt-4">
+                  <div className="mt-4 roboto-font">
                     <div className="mb-3">
                       <label htmlFor="fullname" className="uppercase text-sm">
                         Nama Lengkap

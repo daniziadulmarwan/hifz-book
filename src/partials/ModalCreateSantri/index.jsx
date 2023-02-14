@@ -75,7 +75,7 @@ function ModalCreateSantri({ openCreateModal, setOpenCreateModal }) {
                       <HiOutlineXMark size={18} />
                     </button>
                   </div>
-                  <div className="mt-4">
+                  <div className="mt-4 roboto-font">
                     <div className="mb-3">
                       <label htmlFor="fullname" className="uppercase text-sm">
                         Nama Lengkap
@@ -86,6 +86,7 @@ function ModalCreateSantri({ openCreateModal, setOpenCreateModal }) {
                         id="fullname"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
+                        autoComplete="off"
                       />
                     </div>
 
@@ -119,6 +120,7 @@ function ModalCreateSantri({ openCreateModal, setOpenCreateModal }) {
                         id="asal"
                         value={asal}
                         onChange={(e) => setAsal(e.target.value)}
+                        autoComplete="off"
                       />
                     </div>
                   </div>
