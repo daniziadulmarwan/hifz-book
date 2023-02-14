@@ -7,7 +7,7 @@ function classNames(...classes) {
 
 export default function Tabs() {
   return (
-    <div className="w-full px-2 pt-5 sm:px-0">
+    <div className="w-full px-2 pt-5 sm:px-0 roboto-font">
       <Tab.Group>
         <Tab.List className="flex space-x-1 rounded-xl bg-white shadow p-1">
           <Tab
