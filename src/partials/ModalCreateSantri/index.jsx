@@ -8,15 +8,17 @@ import { toast } from "react-toastify";
 function ModalCreateSantri({ openCreateModal, setOpenCreateModal }) {
   const [name, setName] = useState("");
   const [halaqoh, setHalaqoh] = useState("");
+  const [asal, setAsal] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`${BASE_URL}/createSantri`, { name, halaqoh })
+      .post(`${BASE_URL}/santri/createSantri`, { name, halaqoh, asal })
       .then((res) => {
         toast.success(res.data.msg, { autoClose: 2000 });
         setName("");
         setHalaqoh("");
+        setAsal("");
         setOpenCreateModal(false);
         setTimeout(() => {
           window.location.reload();
@@ -107,12 +109,18 @@ function ModalCreateSantri({ openCreateModal, setOpenCreateModal }) {
                       </select>
                     </div>
 
-                    {/* <div className="mb-3">
-                      <label htmlFor="from" className="uppercase text-sm">
+                    <div className="mb-3">
+                      <label htmlFor="asal" className="uppercase text-sm">
                         Asal
                       </label>
-                      <input type="text" className="form-control" id="from" />
-                    </div> */}
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="asal"
+                        value={asal}
+                        onChange={(e) => setAsal(e.target.value)}
+                      />
+                    </div>
                   </div>
 
                   <div className="mt-5">

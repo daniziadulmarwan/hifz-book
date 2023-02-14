@@ -8,11 +8,12 @@ import { toast } from "react-toastify";
 function ModalEditSantri({ openModalEditSantri, setOpenModalEditSantri, id }) {
   const [name, setName] = useState("");
   const [halaqoh, setHalaqoh] = useState("");
+  const [asal, setAsal] = useState("");
 
   const onUpdate = (e) => {
     e.preventDefault();
     axios
-      .put(`${BASE_URL}/updateSantri/${id}`, { name, halaqoh })
+      .put(`${BASE_URL}/santri/updateSantri/${id}`, { name, halaqoh, asal })
       .then((res) => {
         toast.success(res.data.msg, { autoClose: 2000 });
         setOpenModalEditSantri(false);
@@ -26,10 +27,11 @@ function ModalEditSantri({ openModalEditSantri, setOpenModalEditSantri, id }) {
   };
 
   const getDataById = (id) => {
-    axios.get(`${BASE_URL}/getSantriById/${id}`).then((res) => {
+    axios.get(`${BASE_URL}/santri/getSantriById/${id}`).then((res) => {
       const item = res.data.data;
       setName(item.name);
       setHalaqoh(item.halaqoh);
+      setAsal(item.asal);
     });
   };
 
@@ -117,12 +119,18 @@ function ModalEditSantri({ openModalEditSantri, setOpenModalEditSantri, id }) {
                       </select>
                     </div>
 
-                    {/* <div className="mb-3">
-                      <label htmlFor="from" className="uppercase text-sm">
+                    <div className="mb-3">
+                      <label htmlFor="asal" className="uppercase text-sm">
                         Asal
                       </label>
-                      <input type="text" className="form-control" id="from" />
-                    </div> */}
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="asal"
+                        value={asal}
+                        onChange={(e) => setAsal(e.target.value)}
+                      />
+                    </div>
                   </div>
 
                   <div className="mt-5">
@@ -131,7 +139,7 @@ function ModalEditSantri({ openModalEditSantri, setOpenModalEditSantri, id }) {
                       type="button"
                       className="inline-block w-full justify-center rounded-md border border-transparent bg-sky-400 px-4 py-3 text-sm font-medium text-white hover:bg-sky-500 focus:outline-none uppercase"
                     >
-                      Submit
+                      Update
                     </button>
                   </div>
                 </Dialog.Panel>

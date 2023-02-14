@@ -15,7 +15,7 @@ function TableSantri() {
   const [openModalEditSantri, setOpenModalEditSantri] = useState(false);
 
   const fetchAllData = () => {
-    axios.get(`${BASE_URL}/getAllSantri`).then((res) => {
+    axios.get(`${BASE_URL}/santri/getAllSantri`).then((res) => {
       setDatas(res.data.data);
     });
   };
@@ -93,7 +93,7 @@ function TableSantri() {
               </thead>
               <tbody>
                 {datas.map((data, index) => (
-                  <tr className="bg-white border-b" key={data.id}>
+                  <tr className="bg-white border-b" key={data._id}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                       {index + 1}
                     </td>
@@ -106,11 +106,11 @@ function TableSantri() {
                       </span>
                     </td>
                     <td className="text-base text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      Indonesia
+                      {data.asal}
                     </td>
                     <td className="text-base flex gap-2 text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                       <button
-                        onClick={() => onOpenEditModal(data.id)}
+                        onClick={() => onOpenEditModal(data._id)}
                         className="bg-sky-200 rounded w-9 h-9 grid place-items-center text-white text-sm uppercase font-medium"
                       >
                         <HiPencil size={20} className="text-sky-500" />
