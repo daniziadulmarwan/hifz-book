@@ -1,9 +1,21 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { HiOutlineCheck, HiOutlinePlus, HiOutlineXMark } from "react-icons/hi2";
+import { BASE_URL } from "../../config/api";
 import ModalAddSabaq from "../ModalAddSabaq";
 
 function TableSabaq() {
   const [openModalAddSabaq, setOpenModalAddSabaq] = useState(false);
+
+  const getSabaqBySantriId = (id) => {
+    axios.get(`${BASE_URL}/sabaq/getAllSabaqBySantriId/${id}`).then((res) => {
+      console.log(res.data);
+    });
+  };
+
+  useEffect(() => {
+    getSabaqBySantriId("63eb0d6113b462dc6cf0f765");
+  }, []);
 
   return (
     <>

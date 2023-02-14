@@ -2,20 +2,84 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { HiOutlineXMark } from "react-icons/hi2";
 import axios from "axios";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { BASE_URL } from "../../config/api";
+import { toast } from "react-toastify";
 
 function ModalAddSabaq({ openModalAddSabaq, setOpenModalAddSabaq }) {
+  const [juz, setJuz] = useState([]);
+  const [pageJuz, setPageJuz] = useState([]);
   const [surah, setSurah] = useState([]);
+
+  const [startDate, setStartDate] = useState(new Date());
+  const [pageBook, setPageBook] = useState(0);
+  const [sendSurah, setSendSurah] = useState("");
+  const [sendJuz, setSendJuz] = useState("");
+  const [sendPageJuz, setSendPageJuz] = useState("");
+
+  const clearForm = () => {
+    setStartDate(new Date());
+    setPageBook("");
+    setSendSurah("");
+    setSendJuz("");
+    setSendPageJuz("");
+  };
 
   const getSurahAPI = () => {
     axios.get("https://api.quran.gading.dev/surah").then((res) => {
-      console.log(res.data.data);
       setSurah(res.data.data);
     });
   };
 
+  const fillJuzWithNumber = () => {
+    let items = [];
+    for (let i = 1; i <= 30; i++) {
+      items.push(i);
+    }
+    setJuz(items);
+  };
+
+  const fillPageJuzWithNumber = () => {
+    let items = [];
+    for (let i = 1; i <= 20; i++) {
+      items.push(i);
+    }
+    setPageJuz(items);
+  };
+
   useEffect(() => {
     getSurahAPI();
+    fillJuzWithNumber();
+    fillPageJuzWithNumber();
   }, []);
+
+  const onSubmit = () => {
+    axios
+      .post(`${BASE_URL}/sabaq/createSabaq`, {
+        date: startDate,
+        surah: sendSurah,
+        juz: sendJuz,
+        page_juz: pageBook,
+        page_quran: sendPageJuz,
+        santri_id: "63eb0d6113b462dc6cf0f765",
+      })
+      .then((res) => {
+        toast.success(res.data.msg, { autoClose: 1000 });
+        setOpenModalAddSabaq(false);
+        clearForm();
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      })
+      .catch((err) => {
+        toast.success(err.message, { autoClose: 1000 });
+        clearForm();
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      });
+  };
 
   return (
     <>
@@ -68,10 +132,15 @@ function ModalAddSabaq({ openModalAddSabaq, setOpenModalAddSabaq }) {
                       <label htmlFor="fullname" className="uppercase text-sm">
                         Hari & Tanggal
                       </label>
-                      <input
+                      {/* <input
                         type="date"
                         className="form-control"
                         id="fullname"
+                      /> */}
+                      <DatePicker
+                        selected={startDate}
+                        onChange={(date) => setStartDate(date)}
+                        className="form-control"
                       />
                     </div>
 
@@ -79,10 +148,16 @@ function ModalAddSabaq({ openModalAddSabaq, setOpenModalAddSabaq }) {
                       <label htmlFor="role" className="uppercase text-sm">
                         Surah
                       </label>
-                      <select name="role" id="role" className="form-control">
+                      <select
+                        name="role"
+                        id="role"
+                        className="form-control"
+                        value={sendSurah}
+                        onChange={(e) => setSendSurah(e.target.value)}
+                      >
                         <option hidden>Pilih</option>
-                        {surah.map((item) => (
-                          <option value={item.name.short}>
+                        {surah.map((item, index) => (
+                          <option key={index + 1} value={item.name.short}>
                             {item.name.short}
                           </option>
                         ))}
@@ -90,25 +165,63 @@ function ModalAddSabaq({ openModalAddSabaq, setOpenModalAddSabaq }) {
                     </div>
 
                     <div className="mb-3">
-                      <label htmlFor="role" className="uppercase text-sm">
+                      <label htmlFor="juz" className="uppercase text-sm">
                         Juz
                       </label>
-                      <select name="role" id="role" className="form-control">
+                      <select
+                        name="juz"
+                        id="juz"
+                        className="form-control"
+                        value={sendJuz}
+                        onChange={(e) => setSendJuz(e.target.value)}
+                      >
                         <option hidden>Pilih</option>
-                        <option value="1">1</option>
+                        {juz.map((item, index) => (
+                          <option key={index} value={item}>
+                            {item}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="mb-3">
+                      <label htmlFor="page_juz" className="uppercase text-sm">
+                        Halaman Juz
+                      </label>
+                      <select
+                        name="page_juz"
+                        id="page_juz"
+                        className="form-control"
+                        value={pageBook}
+                        onChange={(e) => setPageBook(e.target.value)}
+                      >
+                        <option hidden>Pilih</option>
+                        {pageJuz.map((item, index) => (
+                          <option key={index} value={item}>
+                            {item}
+                          </option>
+                        ))}
                       </select>
                     </div>
 
                     <div className="mb-3">
                       <label htmlFor="asal" className="uppercase text-sm">
-                        Asal
+                        Halaman Qur'an
                       </label>
-                      <input type="text" className="form-control" id="asal" />
+                      <input
+                        type="number"
+                        autoComplete="off"
+                        className="form-control"
+                        id="asal"
+                        value={sendPageJuz}
+                        onChange={(e) => setSendPageJuz(e.target.value)}
+                      />
                     </div>
                   </div>
 
                   <div className="mt-5">
                     <button
+                      onClick={onSubmit}
                       type="button"
                       className="inline-block w-full justify-center rounded-md border border-transparent bg-sky-400 px-4 py-3 text-sm font-medium text-white hover:bg-sky-500 focus:outline-none uppercase"
                     >
