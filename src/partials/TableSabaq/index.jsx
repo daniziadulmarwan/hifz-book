@@ -1,22 +1,27 @@
 import axios from "axios";
+import jwtDecode from "jwt-decode";
 import React, { useEffect, useState } from "react";
 import { HiOutlineCheck, HiOutlinePlus, HiOutlineXMark } from "react-icons/hi2";
 import { BASE_URL } from "../../config/api";
 import ModalAddSabaq from "../ModalAddSabaq";
 
-function TableSabaq() {
+function TableSabaq({ santri_id }) {
   const [openModalAddSabaq, setOpenModalAddSabaq] = useState(false);
   const [datas, setDatas] = useState([]);
+  const user = jwtDecode(localStorage.getItem("token"));
 
-  const getSabaqBySantriId = (id) => {
-    axios.get(`${BASE_URL}/sabaq/getAllSabaqBySantriId/${id}`).then((res) => {
-      setDatas(res.data.data);
-    });
+  const getSabaqBySantriId = (santri_id) => {
+    axios
+      .get(`${BASE_URL}/sabaq/getAllSabaqBySantriId/${santri_id}`)
+      .then((res) => {
+        setDatas(res.data.data);
+        console.log(res.data);
+      });
   };
 
   useEffect(() => {
-    getSabaqBySantriId("63eb0d6113b462dc6cf0f765");
-  }, []);
+    getSabaqBySantriId(santri_id);
+  }, [santri_id]);
 
   return (
     <>
@@ -154,6 +159,7 @@ function TableSabaq() {
       {/* END: Tabs */}
 
       <ModalAddSabaq
+        santri_id={santri_id}
         openModalAddSabaq={openModalAddSabaq}
         setOpenModalAddSabaq={setOpenModalAddSabaq}
       />

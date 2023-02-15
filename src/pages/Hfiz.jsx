@@ -41,7 +41,7 @@ function Hfiz() {
             Detail Santri - <span className="uppercase">{name}</span>
           </h4>
 
-          <Tabs />
+          <Tabs santri_id={id} />
           {/* END: Main Content */}
         </main>
       </div>

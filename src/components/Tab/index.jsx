@@ -5,7 +5,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Tabs() {
+export default function Tabs({ santri_id }) {
   return (
     <div className="w-full px-2 pt-5 sm:px-0 roboto-font">
       <Tab.Group>
@@ -57,7 +57,7 @@ export default function Tabs() {
               "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none"
             )}
           >
-            <TableSabaq />
+            <TableSabaq santri_id={santri_id} />
           </Tab.Panel>
           <Tab.Panel
             className={classNames(

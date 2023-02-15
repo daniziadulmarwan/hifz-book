@@ -6,8 +6,11 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { BASE_URL } from "../../config/api";
 import { toast } from "react-toastify";
+import jwtDecode from "jwt-decode";
 
-function ModalAddSabaq({ openModalAddSabaq, setOpenModalAddSabaq }) {
+function ModalAddSabaq({ santri_id, openModalAddSabaq, setOpenModalAddSabaq }) {
+  const user = jwtDecode(localStorage.getItem("token"));
+
   const [juz, setJuz] = useState([]);
   const [pageJuz, setPageJuz] = useState([]);
   const [surah, setSurah] = useState([]);
@@ -62,7 +65,7 @@ function ModalAddSabaq({ openModalAddSabaq, setOpenModalAddSabaq }) {
         juz: sendJuz,
         page_juz: pageBook,
         page_quran: sendPageJuz,
-        santri_id: "63eb0d6113b462dc6cf0f765",
+        santri_id: santri_id,
       })
       .then((res) => {
         toast.success(res.data.msg, { autoClose: 1000 });
@@ -127,7 +130,7 @@ function ModalAddSabaq({ openModalAddSabaq, setOpenModalAddSabaq }) {
                       <HiOutlineXMark size={18} />
                     </button>
                   </div>
-                  <div className="mt-4">
+                  <div className="mt-4 roboto-font">
                     <div className="mb-3">
                       <label htmlFor="fullname" className="uppercase text-sm">
                         Hari & Tanggal

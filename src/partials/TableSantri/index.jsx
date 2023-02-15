@@ -23,22 +23,6 @@ function TableSantri() {
     });
   };
 
-  // const refreshToken = async () => {
-  //   try {
-  //     const res = await axios.get(`${BASE_URL}/auth/refresh-token`);
-  //     localStorage.setItem("token", res.data.refreshToken);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // axios.interceptors.request.use(async (config) => {
-  //   const currentDate = new Date();
-  //   if (token.exp * 1000 < currentDate.getTime()) {
-  //     refreshToken();
-  //   }
-  // });
-
   useEffect(() => {
     fetchAllData();
   }, []);
@@ -51,12 +35,14 @@ function TableSantri() {
         {
           label: "Yes",
           onClick: () => {
-            axios.delete(`${BASE_URL}/deleteSantri/${id}`).then((res) => {
-              toast.success(res.data.msg, { autoClose: 2000 });
-              setTimeout(() => {
-                window.location.reload();
-              }, 2000);
-            });
+            axios
+              .delete(`${BASE_URL}/santri/deleteSantri/${id}`)
+              .then((res) => {
+                toast.success(res.data.msg, { autoClose: 2000 });
+                setTimeout(() => {
+                  window.location.reload();
+                }, 2000);
+              });
           },
         },
         {
@@ -135,7 +121,7 @@ function TableSantri() {
                         <HiPencil size={20} className="text-sky-500" />
                       </button>
                       <button
-                        onClick={() => onDelete(data.id)}
+                        onClick={() => onDelete(data._id)}
                         className="bg-red-200 rounded w-9 h-9 grid place-items-center text-white text-sm uppercase font-medium"
                       >
                         <HiTrash size={20} className="text-red-500" />
