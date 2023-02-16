@@ -1,8 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { HiOutlineXMark } from "react-icons/hi2";
-import axios from "axios";
-import { BASE_URL } from "../../config/api";
+import { axiosJwt } from "../../config/api";
 import { toast } from "react-toastify";
 
 function ModalEditSantri({ openModalEditSantri, setOpenModalEditSantri, id }) {
@@ -12,8 +11,8 @@ function ModalEditSantri({ openModalEditSantri, setOpenModalEditSantri, id }) {
 
   const onUpdate = (e) => {
     e.preventDefault();
-    axios
-      .put(`${BASE_URL}/santri/updateSantri/${id}`, { name, halaqoh, asal })
+    axiosJwt
+      .put(`/santri/updateSantri/${id}`, { name, halaqoh, asal })
       .then((res) => {
         toast.success(res.data.msg, { autoClose: 2000 });
         setOpenModalEditSantri(false);
@@ -27,7 +26,7 @@ function ModalEditSantri({ openModalEditSantri, setOpenModalEditSantri, id }) {
   };
 
   const getDataById = (id) => {
-    axios.get(`${BASE_URL}/santri/getSantriById/${id}`).then((res) => {
+    axiosJwt.get(`/santri/getSantriById/${id}`).then((res) => {
       const item = res.data.data;
       setName(item.name);
       setHalaqoh(item.halaqoh);

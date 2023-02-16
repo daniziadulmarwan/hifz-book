@@ -5,6 +5,7 @@ import ImgLogin from "../assets/images/img-login.jpg";
 import ImgAmin from "../assets/images/logo-santri.png";
 import { useNavigate } from "react-router-dom";
 import { axiosJwt } from "../config/api";
+import Loading from "../components/Loading";
 
 function SignIn() {
   const navigate = useNavigate();

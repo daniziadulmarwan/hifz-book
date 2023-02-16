@@ -1,8 +1,7 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { HiPencil, HiTrash, HiArrowRightCircle } from "react-icons/hi2";
 import { NavLink } from "react-router-dom";
-import { BASE_URL } from "../../config/api";
+import { axiosJwt } from "../../config/api";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";
@@ -15,10 +14,7 @@ function TableSantri() {
   const [openModalEditSantri, setOpenModalEditSantri] = useState(false);
 
   const fetchAllData = () => {
-    axios.defaults.headers.common = {
-      Authorization: `bearer ${localStorage.getItem("token")}`,
-    };
-    axios.get(`${BASE_URL}/santri/getAllSantri`).then((res) => {
+    axiosJwt.get("/santri/getAllSantri").then((res) => {
       setDatas(res.data.data);
     });
   };
@@ -35,14 +31,12 @@ function TableSantri() {
         {
           label: "Yes",
           onClick: () => {
-            axios
-              .delete(`${BASE_URL}/santri/deleteSantri/${id}`)
-              .then((res) => {
-                toast.success(res.data.msg, { autoClose: 2000 });
-                setTimeout(() => {
-                  window.location.reload();
-                }, 2000);
-              });
+            axiosJwt.delete(`/santri/deleteSantri/${id}`).then((res) => {
+              toast.success(res.data.msg, { autoClose: 2000 });
+              setTimeout(() => {
+                window.location.reload();
+              }, 2000);
+            });
           },
         },
         {

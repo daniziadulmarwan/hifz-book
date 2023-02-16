@@ -4,13 +4,10 @@ import { HiOutlineXMark } from "react-icons/hi2";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { BASE_URL } from "../../config/api";
+import { axiosJwt } from "../../config/api";
 import { toast } from "react-toastify";
-import jwtDecode from "jwt-decode";
 
 function ModalAddSabaq({ santri_id, openModalAddSabaq, setOpenModalAddSabaq }) {
-  const user = jwtDecode(localStorage.getItem("token"));
-
   const [juz, setJuz] = useState([]);
   const [pageJuz, setPageJuz] = useState([]);
   const [surah, setSurah] = useState([]);
@@ -58,8 +55,8 @@ function ModalAddSabaq({ santri_id, openModalAddSabaq, setOpenModalAddSabaq }) {
   }, []);
 
   const onSubmit = () => {
-    axios
-      .post(`${BASE_URL}/sabaq/createSabaq`, {
+    axiosJwt
+      .post(`/sabaq/createSabaq`, {
         date: startDate,
         surah: sendSurah,
         juz: sendJuz,

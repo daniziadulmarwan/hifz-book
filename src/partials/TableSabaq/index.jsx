@@ -1,8 +1,7 @@
-import axios from "axios";
 import jwtDecode from "jwt-decode";
 import React, { useEffect, useState } from "react";
 import { HiOutlineCheck, HiOutlinePlus, HiOutlineXMark } from "react-icons/hi2";
-import { BASE_URL } from "../../config/api";
+import { axiosJwt } from "../../config/api";
 import ModalAddSabaq from "../ModalAddSabaq";
 
 function TableSabaq({ santri_id }) {
@@ -11,12 +10,9 @@ function TableSabaq({ santri_id }) {
   const user = jwtDecode(localStorage.getItem("token"));
 
   const getSabaqBySantriId = (santri_id) => {
-    axios
-      .get(`${BASE_URL}/sabaq/getAllSabaqBySantriId/${santri_id}`)
-      .then((res) => {
-        setDatas(res.data.data);
-        console.log(res.data);
-      });
+    axiosJwt.get(`/sabaq/getAllSabaqBySantriId/${santri_id}`).then((res) => {
+      setDatas(res.data.data);
+    });
   };
 
   useEffect(() => {

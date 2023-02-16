@@ -57,7 +57,9 @@ export default function Tabs({ santri_id }) {
               "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none"
             )}
           >
+            {/* START: Table Sabaq */}
             <TableSabaq santri_id={santri_id} />
+            {/* END: Table Sabaq */}
           </Tab.Panel>
           <Tab.Panel
             className={classNames(

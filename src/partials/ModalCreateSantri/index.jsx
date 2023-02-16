@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { HiOutlineXMark } from "react-icons/hi2";
 import axios from "axios";
-import { BASE_URL } from "../../config/api";
+import { axiosJwt, BASE_URL } from "../../config/api";
 import { toast } from "react-toastify";
 
 function ModalCreateSantri({ openCreateModal, setOpenCreateModal }) {
@@ -12,8 +12,8 @@ function ModalCreateSantri({ openCreateModal, setOpenCreateModal }) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post(`${BASE_URL}/santri/createSantri`, { name, halaqoh, asal })
+    axiosJwt
+      .post("/santri/createSantri", { name, halaqoh, asal })
       .then((res) => {
         toast.success(res.data.msg, { autoClose: 2000 });
         setName("");

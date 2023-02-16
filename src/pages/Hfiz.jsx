@@ -1,10 +1,9 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import Tabs from "../components/Tab";
-import { BASE_URL } from "../config/api";
+import { axiosJwt } from "../config/api";
 
 function Hfiz() {
   const { id } = useParams();
@@ -12,7 +11,7 @@ function Hfiz() {
   const [name, setName] = useState("");
 
   const getSantriById = (id) => {
-    axios.get(`${BASE_URL}/santri/getSantriById/${id}`).then((res) => {
+    axiosJwt.get(`/santri/getSantriById/${id}`).then((res) => {
       setName(res.data.data.name);
     });
   };
