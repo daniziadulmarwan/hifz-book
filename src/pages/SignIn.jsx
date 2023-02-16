@@ -1,64 +1,109 @@
-import axios from "axios";
 import React, { useState } from "react";
+import { HiOutlineEye, HiOutlineEyeSlash } from "react-icons/hi2";
+import ReCAPTCHA from "react-google-recaptcha";
+import ImgLogin from "../assets/images/img-login.jpg";
+import ImgAmin from "../assets/images/santri.png";
 import { useNavigate } from "react-router-dom";
-import { BASE_URL } from "../config/api";
+import { axiosJwt } from "../config/api";
 
-export default function SignIn() {
+function SignIn() {
   const navigate = useNavigate();
+  const [show, setShow] = useState(false);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [captcha, setCaptcha] = useState(null);
 
-  const onSubmit = () => {
-    axios
-      .post(`${BASE_URL}/auth/signin`, { username, password })
-      .then((res) => {
-        console.log(res.data);
-        localStorage.setItem("token", res.data.token);
-        navigate("/dashboard");
-      });
+  const onSubmit = (e) => {
+    e.preventDefault();
+    axiosJwt.post("/auth/signin", { username, password }).then((response) => {
+      localStorage.setItem("token", response.data.token);
+      navigate("/dashboard");
+    });
   };
 
   return (
-    <div className="h-screen w-full flex overflow-y-hidden">
-      <div className="w-full px-5 lg:px-0 lg:w-1/2 h-full flex justify-center items-center">
-        <div className="w-96">
-          <form>
-            <div className="mb-3">
-              <label htmlFor="username">Username</label>
+    <div className="w-screen h-screen flex overflow-x-hidden">
+      <div className="w-full md:w-1/2 h-screen">
+        <div className="px-10 md:px-32 h-screen flex flex-col justify-center items-center">
+          <img src={ImgAmin} alt="Amin Gambar" width={750} className="mb-4" />
+
+          <form className="flex flex-col gap-4 w-full lg:w-8/12">
+            <div>
               <input
-                autoComplete="off"
+                className="border border-slate-300 w-full py-3 px-2 rounded focus:outline-none focus:border-slate-500 focus:border"
                 id="username"
                 type="text"
-                className="w-full border border-slate-300 py-2 px-4 rounded focus:border-slate-300 active:border-slate-300 focus:outline-none"
+                placeholder="Username"
+                autoComplete="off"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
             </div>
-            <div className="mb-4">
-              <label htmlFor="password">Password</label>
+            <div className="relative">
               <input
-                autoComplete="off"
+                className="border border-slate-300 w-full py-3 px-2 rounded focus:outline-none focus:border-slate-500 focus:border"
                 id="password"
-                type="password"
-                className="w-full border border-slate-300 py-2 px-4 rounded focus:border-slate-300 active:border-slate-300 focus:outline-none"
+                type={`${show ? "text" : "password"}`}
+                placeholder="Password"
+                autoComplete="off"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-            </div>
-            <div className="mb-3">
-              <button
-                onClick={onSubmit}
-                type="button"
-                className="w-full py-2 px-4 rounded uppercase bg-sky-500 text-white hover:bg-sky-400"
+              <div
+                className="absolute right-3 top-3 cursor-pointer"
+                onClick={() => setShow(!show)}
               >
-                Submit
-              </button>
+                {show ? (
+                  <HiOutlineEyeSlash size={20} />
+                ) : (
+                  <HiOutlineEye size={20} />
+                )}
+              </div>
             </div>
+
+            <div>
+              <ReCAPTCHA
+                sitekey="6LeFod4jAAAAAKeo9fwXl1Sv5Xct65DIIYpvhsqS"
+                onChange={(value) => setCaptcha(value)}
+              />
+            </div>
+
+            <button
+              disabled={
+                username !== "" && password.length >= 6 && captcha !== null
+                  ? false
+                  : true
+              }
+              className={`bg-sky-500 hover:bg-sky-400 py-2 grid place-items-center uppercase rounded text-white font-semibold disabled:bg-gray-200 disabled:text-gray-400 disabled:hover:bg-gray-200 disabled:font-semibold`}
+              type="submit"
+              onClick={onSubmit}
+            >
+              Login
+            </button>
           </form>
+
+          <div className="mt-8">
+            <p className="text-left">
+              Perlu bantuan?{" "}
+              <span className="text-[#2C94FD] font-semibold cursor-pointer">
+                Hubungi Zeiteim Digital Care
+              </span>
+            </p>
+          </div>
         </div>
       </div>
-      <div className="hidden lg:block lg:w-1/2 bg-yellow-200 h-full"></div>
+
+      {/* START: Right */}
+      <div className="w-0 md:w-1/2 h-screen">
+        <img
+          src={ImgLogin}
+          alt="Gambar Login"
+          className="bg-login w-full p-1"
+        />
+      </div>
     </div>
   );
 }
+
+export default SignIn;

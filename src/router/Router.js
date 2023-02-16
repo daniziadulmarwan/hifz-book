@@ -1,7 +1,5 @@
-import axios from "axios";
 import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { BASE_URL } from "../config/api";
 import Dashboard from "../pages/Dashboard";
 import Hfiz from "../pages/Hfiz";
 import Santri from "../pages/Santri";
