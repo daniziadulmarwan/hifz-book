@@ -32,9 +32,7 @@ export default function Dashboard() {
                 <HiOutlineHome size={32} className="text-white" />
               </div>
               <div className="ml-3">
-                <h1 className="text-2xl text-slate-900 roboto-font">
-                  Jenis Lembaga
-                </h1>
+                <h1 className="text-2xl text-slate-900">Jenis Lembaga</h1>
                 <p>Pondok Pesantren</p>
               </div>
             </div>
@@ -44,9 +42,7 @@ export default function Dashboard() {
                 <HiOutlineUsers size={32} className="text-white" />
               </div>
               <div className="ml-3">
-                <h1 className="text-2xl text-slate-900 roboto-font">
-                  Jumlah Santri
-                </h1>
+                <h1 className="text-2xl text-slate-900">Jumlah Santri</h1>
                 <p>15</p>
               </div>
             </div>
@@ -56,9 +52,7 @@ export default function Dashboard() {
                 <HiOutlineUsers size={32} className="text-white" />
               </div>
               <div className="ml-3">
-                <h1 className="text-2xl text-slate-900 roboto-font">
-                  Jumlah Ustadz
-                </h1>
+                <h1 className="text-2xl text-slate-900">Jumlah Ustadz</h1>
                 <p>8</p>
               </div>
             </div>
@@ -68,9 +62,7 @@ export default function Dashboard() {
                 <HiOutlineCurrencyDollar size={32} className="text-white" />
               </div>
               <div className="ml-3">
-                <h1 className="text-2xl text-slate-900 roboto-font">
-                  Jumlah Penghasilan
-                </h1>
+                <h1 className="text-2xl text-slate-900">Jumlah Penghasilan</h1>
                 <p>Rp. 15.000.000,00/Bulan</p>
               </div>
             </div>
