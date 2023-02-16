@@ -3,8 +3,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import jwtDecode from "jwt-decode";
 import { confirmAlert } from "react-confirm-alert";
-import { BASE_URL } from "../../config/api";
-import axios from "axios";
+import { axiosJwt } from "../../config/api";
 import { useNavigate } from "react-router-dom";
 
 function classNames(...classes) {
@@ -23,13 +22,8 @@ export default function Dropdown() {
         {
           label: "Yes",
           onClick: () => {
-            axios.defaults.headers.common = {
-              Authorization: `bearer ${localStorage.getItem("token")}`,
-            };
-            axios.delete(`${BASE_URL}/auth/signout`).then((res) => {
-              localStorage.removeItem("token");
-              navigate("/");
-            });
+            localStorage.removeItem("token");
+            navigate("/");
           },
         },
         {
