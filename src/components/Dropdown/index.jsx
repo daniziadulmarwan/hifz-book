@@ -3,7 +3,6 @@ import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import jwtDecode from "jwt-decode";
 import { confirmAlert } from "react-confirm-alert";
-import { axiosJwt } from "../../config/api";
 import { useNavigate } from "react-router-dom";
 
 function classNames(...classes) {

@@ -1,8 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { HiOutlineXMark } from "react-icons/hi2";
-import axios from "axios";
-import { axiosJwt, BASE_URL } from "../../config/api";
+import { axiosJwt } from "../../config/api";
 import { toast } from "react-toastify";
 
 function ModalCreateSantri({ openCreateModal, setOpenCreateModal }) {
