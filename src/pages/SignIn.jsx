@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { HiOutlineEye, HiOutlineEyeSlash } from "react-icons/hi2";
 import ReCAPTCHA from "react-google-recaptcha";
 import ImgLogin from "../assets/images/img-login.jpg";
-import ImgAmin from "../assets/images/santri.png";
+import ImgAmin from "../assets/images/logo-santri.png";
 import { useNavigate } from "react-router-dom";
 import { axiosJwt } from "../config/api";
 
@@ -26,7 +26,7 @@ function SignIn() {
     <div className="w-screen h-screen flex overflow-x-hidden">
       <div className="w-full md:w-1/2 h-screen">
         <div className="px-10 md:px-32 h-screen flex flex-col justify-center items-center">
-          <img src={ImgAmin} alt="Amin Gambar" width={750} className="mb-4" />
+          <img src={ImgAmin} alt="Amin Gambar" width={220} className="mb-4" />
 
           <form className="flex flex-col gap-4 w-full lg:w-8/12">
             <div>

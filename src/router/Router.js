@@ -8,24 +8,6 @@ import SignIn from "../pages/SignIn";
 
 const AuthCheck = ({ children }) => {
   const token = localStorage.getItem("token");
-
-  // const refreshToken = async () => {
-  //   try {
-  //     const res = await axios.get(`${BASE_URL}/auth/refresh-token`);
-  //     localStorage.removeItem("token");
-  //     localStorage.setItem("token", res.data.refreshToken);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // axios.interceptors.request.use(async (config) => {
-  //   const currentDate = new Date();
-  //   if (token.exp * 1000 < currentDate.getTime()) {
-  //     refreshToken();
-  //   }
-  // });
-
   return token ? children : <Navigate to="/" />;
 };
 
@@ -51,8 +33,22 @@ function Router() {
             </AuthCheck>
           }
         />
-        <Route path="/santri/hfiz/:id" element={<Hfiz />} />
-        <Route path="/setting" element={<Setting />} />
+        <Route
+          path="/santri/hfiz/:id"
+          element={
+            <AuthCheck>
+              <Hfiz />
+            </AuthCheck>
+          }
+        />
+        <Route
+          path="/setting"
+          element={
+            <AuthCheck>
+              <Setting />
+            </AuthCheck>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
