@@ -8,20 +8,24 @@ function ModalEditSantri({ openModalEditSantri, setOpenModalEditSantri, id }) {
   const [name, setName] = useState("");
   const [halaqoh, setHalaqoh] = useState("");
   const [asal, setAsal] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const onUpdate = (e) => {
     e.preventDefault();
+    setLoading(true);
     axiosJwt
       .put(`/santri/updateSantri/${id}`, { name, halaqoh, asal })
       .then((res) => {
         toast.success(res.data.msg, { autoClose: 2000 });
         setOpenModalEditSantri(false);
+        setLoading(false);
         setTimeout(() => {
           window.location.reload();
         }, 2000);
       })
       .catch((err) => {
         toast(err.message);
+        setLoading(false);
       });
   };
 
@@ -133,13 +137,23 @@ function ModalEditSantri({ openModalEditSantri, setOpenModalEditSantri, id }) {
                   </div>
 
                   <div className="mt-5">
-                    <button
-                      onClick={onUpdate}
-                      type="button"
-                      className="inline-block w-full justify-center rounded-md border border-transparent bg-sky-400 px-4 py-3 text-sm font-medium text-white hover:bg-sky-500 focus:outline-none uppercase"
-                    >
-                      Update
-                    </button>
+                    {loading ? (
+                      <button
+                        disabled
+                        type="button"
+                        className="inline-block w-full justify-center rounded-md border border-transparent bg-sky-400 px-4 py-3 text-sm font-medium text-white focus:outline-none uppercase"
+                      >
+                        Loading...
+                      </button>
+                    ) : (
+                      <button
+                        onClick={onUpdate}
+                        type="button"
+                        className="inline-block w-full justify-center rounded-md border border-transparent bg-sky-400 px-4 py-3 text-sm font-medium text-white hover:bg-sky-500 focus:outline-none uppercase"
+                      >
+                        Update
+                      </button>
+                    )}
                   </div>
                 </Dialog.Panel>
               </Transition.Child>

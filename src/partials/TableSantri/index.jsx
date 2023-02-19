@@ -137,6 +137,7 @@ function TableSantri() {
           </div>
         </div>
       </div>
+      {/* <div className="mb-20"></div> */}
       {openModalEditSantri && (
         <ModalEditSantri
           id={id}

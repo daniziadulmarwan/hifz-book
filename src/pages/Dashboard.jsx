@@ -27,7 +27,7 @@ export default function Dashboard() {
         <main className="w-full h-full bg-gray-100 px-3 pt-3 overflow-x-auto">
           {/* START: Main Content */}
           <div className="flex flex-col lg:flex-row gap-3">
-            <div className="card w-full lg:w-1/4 bg-white flex items-center py-7 px-5">
+            <div className="card w-full lg:w-1/3 bg-white flex items-center py-7 px-5">
               <div className="w-16 h-16 rounded-full bg-sky-200 grid place-items-center">
                 <HiOutlineHome size={32} className="text-white" />
               </div>
@@ -37,7 +37,7 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <div className="card w-full lg:w-1/4 bg-white flex items-center py-7 px-5">
+            <div className="card w-full lg:w-1/3 bg-white flex items-center py-7 px-5">
               <div className="w-16 h-16 rounded-full bg-yellow-400 grid place-items-center">
                 <HiOutlineUsers size={32} className="text-white" />
               </div>
@@ -47,23 +47,13 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <div className="card w-full lg:w-1/4 bg-white flex items-center py-7 px-5">
+            <div className="card w-full lg:w-1/3 bg-white flex items-center py-7 px-5">
               <div className="w-16 h-16 rounded-full bg-lime-300 grid place-items-center">
                 <HiOutlineUsers size={32} className="text-white" />
               </div>
               <div className="ml-3">
                 <h1 className="text-2xl text-slate-900">Jumlah Ustadz</h1>
                 <p>8</p>
-              </div>
-            </div>
-
-            <div className="card w-full lg:w-1/4 bg-white flex items-center py-7 px-5">
-              <div className="w-16 h-16 rounded-full bg-pink-400 grid place-items-center">
-                <HiOutlineCurrencyDollar size={32} className="text-white" />
-              </div>
-              <div className="ml-3">
-                <h1 className="text-2xl text-slate-900">Jumlah Penghasilan</h1>
-                <p>Rp. 15.000.000,00/Bulan</p>
               </div>
             </div>
           </div>

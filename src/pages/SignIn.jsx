@@ -9,6 +9,7 @@ import { axiosJwt } from "../config/api";
 function SignIn() {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -16,8 +17,10 @@ function SignIn() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     axiosJwt.post("/auth/signin", { username, password }).then((response) => {
       localStorage.setItem("token", response.data.token);
+      setLoading(false);
       navigate("/dashboard");
     });
   };
@@ -69,18 +72,28 @@ function SignIn() {
               />
             </div>
 
-            <button
-              disabled={
-                username !== "" && password.length >= 6 && captcha !== null
-                  ? false
-                  : true
-              }
-              className={`bg-sky-500 hover:bg-sky-400 py-2 grid place-items-center uppercase rounded text-white font-semibold disabled:bg-gray-200 disabled:text-gray-400 disabled:hover:bg-gray-200 disabled:font-semibold`}
-              type="submit"
-              onClick={onSubmit}
-            >
-              Login
-            </button>
+            {loading ? (
+              <button
+                disabled
+                className="bg-sky-500 py-2 grid place-items-center uppercase rounded text-white font-semibold"
+                type="submit"
+              >
+                Loading...
+              </button>
+            ) : (
+              <button
+                disabled={
+                  username !== "" && password.length >= 6 && captcha !== null
+                    ? false
+                    : true
+                }
+                className={`bg-sky-500 hover:bg-sky-400 py-2 grid place-items-center uppercase rounded text-white font-semibold disabled:bg-gray-200 disabled:text-gray-400 disabled:hover:bg-gray-200 disabled:font-semibold`}
+                type="submit"
+                onClick={onSubmit}
+              >
+                Login
+              </button>
+            )}
           </form>
 
           <div className="mt-8">

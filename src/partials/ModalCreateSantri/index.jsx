@@ -8,9 +8,11 @@ function ModalCreateSantri({ openCreateModal, setOpenCreateModal }) {
   const [name, setName] = useState("");
   const [halaqoh, setHalaqoh] = useState("");
   const [asal, setAsal] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     axiosJwt
       .post("/santri/createSantri", { name, halaqoh, asal })
       .then((res) => {
@@ -18,6 +20,7 @@ function ModalCreateSantri({ openCreateModal, setOpenCreateModal }) {
         setName("");
         setHalaqoh("");
         setAsal("");
+        setLoading(false);
         setOpenCreateModal(false);
         setTimeout(() => {
           window.location.reload();
@@ -25,6 +28,7 @@ function ModalCreateSantri({ openCreateModal, setOpenCreateModal }) {
       })
       .catch((err) => {
         toast(err.message);
+        setLoading(false);
       });
   };
 
@@ -125,13 +129,23 @@ function ModalCreateSantri({ openCreateModal, setOpenCreateModal }) {
                   </div>
 
                   <div className="mt-5">
-                    <button
-                      onClick={onSubmit}
-                      type="button"
-                      className="inline-block w-full justify-center rounded-md border border-transparent bg-sky-400 px-4 py-3 text-sm font-medium text-white hover:bg-sky-500 focus:outline-none uppercase"
-                    >
-                      Submit
-                    </button>
+                    {loading ? (
+                      <button
+                        disabled
+                        type="button"
+                        className="inline-block w-full justify-center rounded-md border border-transparent bg-sky-400 px-4 py-3 text-sm font-medium text-white focus:outline-none uppercase"
+                      >
+                        Loading...
+                      </button>
+                    ) : (
+                      <button
+                        onClick={onSubmit}
+                        type="button"
+                        className="inline-block w-full justify-center rounded-md border border-transparent bg-sky-400 px-4 py-3 text-sm font-medium text-white hover:bg-sky-500 focus:outline-none uppercase"
+                      >
+                        Submit
+                      </button>
+                    )}
                   </div>
                 </Dialog.Panel>
               </Transition.Child>

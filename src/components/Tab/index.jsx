@@ -53,7 +53,7 @@ export default function Tabs({ santri_id }) {
         <Tab.Panels className="mt-2">
           <Tab.Panel
             className={classNames(
-              "rounded bg-white shadow p-3",
+              "rounded bg-white shadow p-3 mb-32",
               "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none"
             )}
           >
@@ -63,7 +63,7 @@ export default function Tabs({ santri_id }) {
           </Tab.Panel>
           <Tab.Panel
             className={classNames(
-              "rounded bg-white shadow p-3",
+              "rounded bg-white shadow p-3 mb-32",
               "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none"
             )}
           >
@@ -71,7 +71,7 @@ export default function Tabs({ santri_id }) {
           </Tab.Panel>
           <Tab.Panel
             className={classNames(
-              "rounded bg-white shadow p-3",
+              "rounded bg-white shadow p-3 mb-32",
               "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none mb-20"
             )}
           >
