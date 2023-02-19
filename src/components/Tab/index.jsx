@@ -1,5 +1,7 @@
 import { Tab } from "@headlessui/react";
+import TableManzil from "../../partials/TableManzil";
 import TableSabaq from "../../partials/TableSabaq";
+import TableSabqi from "../../partials/TableSabqi";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -67,7 +69,9 @@ export default function Tabs({ santri_id }) {
               "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none"
             )}
           >
-            <h5>Sabqi</h5>
+            {/* START: Table Sabqi */}
+            <TableSabqi santri_id={santri_id} />
+            {/* END: Table Sabqi */}
           </Tab.Panel>
           <Tab.Panel
             className={classNames(
@@ -75,7 +79,9 @@ export default function Tabs({ santri_id }) {
               "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none mb-20"
             )}
           >
-            <h5>Manzil</h5>
+            {/* START: Table Sabaq */}
+            <TableManzil santri_id={santri_id} />
+            {/* END: Table Sabaq */}
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>

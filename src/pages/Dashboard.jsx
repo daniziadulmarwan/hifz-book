@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
-import {
-  HiOutlineCurrencyDollar,
-  HiOutlineHome,
-  HiOutlineUsers,
-} from "react-icons/hi2";
+import { HiOutlineHome, HiOutlineUsers } from "react-icons/hi2";
 
 export default function Dashboard() {
   const [openSidebar, setOpenSidebar] = useState(false);

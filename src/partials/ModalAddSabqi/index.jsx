@@ -1,13 +1,12 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { HiOutlineXMark } from "react-icons/hi2";
-import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { axiosJwt } from "../../config/api";
 import { toast } from "react-toastify";
 
-function ModalAddSabaq({ santri_id, openModalAddSabaq, setOpenModalAddSabaq }) {
+function ModalAddSabqi({ santri_id, openModalAddSabqi, setOpenModalAddSabqi }) {
   const [juz, setJuz] = useState([]);
   const [pageJuz, setPageJuz] = useState([]);
   const [surah, setSurah] = useState([]);
@@ -27,17 +26,21 @@ function ModalAddSabaq({ santri_id, openModalAddSabaq, setOpenModalAddSabaq }) {
   };
 
   const getSurahAPI = () => {
-    axios.get("https://api.quran.gading.dev/surah").then((res) => {
-      setSurah(res.data.data);
+    axiosJwt.get("/sabaq/getAllSabaq").then((res) => {
+      let newSurah = res.data.data.map((data) => {
+        return data.surah;
+      });
+      setSurah(Array.from(new Set(newSurah)));
     });
   };
 
-  const fillJuzWithNumber = () => {
-    let items = [];
-    for (let i = 1; i <= 30; i++) {
-      items.push(i);
-    }
-    setJuz(items);
+  const getJuzAPI = () => {
+    axiosJwt.get("/sabaq/getAllSabaq").then((res) => {
+      let newJuz = res.data.data.map((data) => {
+        return data.juz;
+      });
+      setJuz(Array.from(new Set(newJuz)));
+    });
   };
 
   const fillPageJuzWithNumber = () => {
@@ -50,13 +53,13 @@ function ModalAddSabaq({ santri_id, openModalAddSabaq, setOpenModalAddSabaq }) {
 
   useEffect(() => {
     getSurahAPI();
-    fillJuzWithNumber();
+    getJuzAPI();
     fillPageJuzWithNumber();
   }, []);
 
   const onSubmit = () => {
     axiosJwt
-      .post(`/sabaq/createSabaq`, {
+      .post(`/sabqi/createSabqi`, {
         date: startDate,
         surah: sendSurah,
         juz: sendJuz,
@@ -66,7 +69,7 @@ function ModalAddSabaq({ santri_id, openModalAddSabaq, setOpenModalAddSabaq }) {
       })
       .then((res) => {
         toast.success(res.data.msg, { autoClose: 1000 });
-        setOpenModalAddSabaq(false);
+        setOpenModalAddSabqi(false);
         clearForm();
       })
       .catch((err) => {
@@ -77,11 +80,11 @@ function ModalAddSabaq({ santri_id, openModalAddSabaq, setOpenModalAddSabaq }) {
 
   return (
     <>
-      <Transition appear show={openModalAddSabaq} as={Fragment}>
+      <Transition appear show={openModalAddSabqi} as={Fragment}>
         <Dialog
           as="div"
           className="relative z-10"
-          onClose={() => setOpenModalAddSabaq(false)}
+          onClose={() => setOpenModalAddSabqi(false)}
         >
           <Transition.Child
             as={Fragment}
@@ -115,7 +118,7 @@ function ModalAddSabaq({ santri_id, openModalAddSabaq, setOpenModalAddSabaq }) {
                       Tambah Data Sabaq
                     </Dialog.Title>
                     <button
-                      onClick={() => setOpenModalAddSabaq(false)}
+                      onClick={() => setOpenModalAddSabqi(false)}
                       className="border border-slate-300 rounded p-1"
                     >
                       <HiOutlineXMark size={18} />
@@ -126,11 +129,6 @@ function ModalAddSabaq({ santri_id, openModalAddSabaq, setOpenModalAddSabaq }) {
                       <label htmlFor="fullname" className="uppercase text-sm">
                         Hari & Tanggal
                       </label>
-                      {/* <input
-                        type="date"
-                        className="form-control"
-                        id="fullname"
-                      /> */}
                       <DatePicker
                         selected={startDate}
                         onChange={(date) => setStartDate(date)}
@@ -151,8 +149,8 @@ function ModalAddSabaq({ santri_id, openModalAddSabaq, setOpenModalAddSabaq }) {
                       >
                         <option hidden>Pilih</option>
                         {surah.map((item, index) => (
-                          <option key={index + 1} value={item.name.short}>
-                            {item.name.short}
+                          <option key={index + 1} value={item}>
+                            {item}
                           </option>
                         ))}
                       </select>
@@ -232,4 +230,4 @@ function ModalAddSabaq({ santri_id, openModalAddSabaq, setOpenModalAddSabaq }) {
   );
 }
 
-export default ModalAddSabaq;
+export default ModalAddSabqi;

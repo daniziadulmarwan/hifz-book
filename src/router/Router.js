@@ -11,23 +11,16 @@ const AuthCheck = ({ children }) => {
   return token ? children : <Navigate to="/" />;
 };
 
-const GuestCheck = ({ children }) => {
-  const token = localStorage.getItem("token");
-  return !token ? children : <Navigate to="/dashboard" />;
-};
+// const GuestCheck = ({ children }) => {
+//   const token = localStorage.getItem("token");
+//   return !token ? children : <Navigate to="/dashboard" />;
+// };
 
 function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <GuestCheck>
-              <SignIn />
-            </GuestCheck>
-          }
-        />
+        <Route path="/" element={<SignIn />} />
 
         <Route
           path="/dashboard"
