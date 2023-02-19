@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { HiOutlineCheck, HiOutlinePlus, HiOutlineXMark } from "react-icons/hi2";
 import { axiosJwt } from "../../config/api";
 import ModalAddSabaq from "../ModalAddSabaq";
+import Spinner from "../../assets/images/spinner.gif";
 
 function TableSabaq({ santri_id }) {
   const [openModalAddSabaq, setOpenModalAddSabaq] = useState(false);
@@ -95,55 +96,67 @@ function TableSabaq({ santri_id }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {datas.map((data, index) => (
-                    <tr className="bg-white border-b" key={data._id}>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {index + 1}
-                      </td>
-                      <td className="text-base text-left text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {data.hari}
-                      </td>
-                      <td className="text-base text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {new Date(data.tanggal).toLocaleDateString("id-ID")}
-                      </td>
-                      <td className="text-base text-gray-900 font-light px-6 py-4 whitespace-nowrap kufi-font">
-                        {data.surah}
-                      </td>
-                      <td className="text-base text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {data.juz}
-                      </td>
-                      <td className="text-base text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {data.page_juz}
-                      </td>
-                      <td className="text-base text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {data.page_quran}
-                      </td>
-                      <td className="text-base text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {data.page_juz === 20 ? (
-                          <span className="bg-green-200 py-1 px-2 rounded flex items-center">
-                            <HiOutlineCheck
-                              size={18}
-                              className="mr-3 font-bold text-green-500"
-                            />
-                            Selesai
-                          </span>
-                        ) : (
-                          <span className="bg-red-200 py-1 px-2 rounded flex items-center">
-                            <HiOutlineXMark
-                              size={18}
-                              className="mr-3 font-bold text-red-500"
-                            />
-                            Belum Selesai
-                          </span>
-                        )}
-                      </td>
-                      <td className="text-base text-grHiOutlineCheckay-900 font-light px-6 py-4 whitespace-nowrap">
-                        <button className="bg-blue-500 rounded py-2 px-3 text-white text-sm uppercase font-medium">
-                          Ubah Data
-                        </button>
+                  {datas.length ? (
+                    datas.map((data, index) => (
+                      <tr className="bg-white border-b" key={data._id}>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          {index + 1}
+                        </td>
+                        <td className="text-base text-left text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          {data.hari}
+                        </td>
+                        <td className="text-base text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          {new Date(data.tanggal).toLocaleDateString("id-ID")}
+                        </td>
+                        <td className="text-base text-gray-900 font-light px-6 py-4 whitespace-nowrap kufi-font">
+                          {data.surah}
+                        </td>
+                        <td className="text-base text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          {data.juz}
+                        </td>
+                        <td className="text-base text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          {data.page_juz}
+                        </td>
+                        <td className="text-base text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          {data.page_quran}
+                        </td>
+                        <td className="text-base text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          {data.page_juz === 20 ? (
+                            <span className="bg-green-200 py-1 px-2 rounded flex items-center">
+                              <HiOutlineCheck
+                                size={18}
+                                className="mr-3 font-bold text-green-500"
+                              />
+                              Selesai
+                            </span>
+                          ) : (
+                            <span className="bg-red-200 py-1 px-2 rounded flex items-center">
+                              <HiOutlineXMark
+                                size={18}
+                                className="mr-3 font-bold text-red-500"
+                              />
+                              Belum Selesai
+                            </span>
+                          )}
+                        </td>
+                        <td className="text-base text-grHiOutlineCheckay-900 font-light px-6 py-4 whitespace-nowrap">
+                          <button className="bg-blue-500 rounded py-2 px-3 text-white text-sm uppercase font-medium">
+                            Ubah Data
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr className="h-48">
+                      <td rowSpan={10} colSpan={9} className="text-center">
+                        <img
+                          src={Spinner}
+                          alt="spinner"
+                          className="inline-block"
+                        />
                       </td>
                     </tr>
-                  ))}
+                  )}
                 </tbody>
               </table>
             </div>

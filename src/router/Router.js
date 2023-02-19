@@ -8,7 +8,7 @@ import SignIn from "../pages/SignIn";
 
 const AuthCheck = ({ children }) => {
   const token = localStorage.getItem("token");
-  return token ? children : <Navigate to="/" />;
+  return token.length ? children : <Navigate to="/" />;
 };
 
 // const GuestCheck = ({ children }) => {

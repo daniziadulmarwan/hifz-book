@@ -6,6 +6,7 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";
 import ModalEditSantri from "../ModalEditSantri";
+import Spinner from "../../assets/images/spinner.gif";
 
 function TableSantri() {
   const [datas, setDatas] = useState([]);
@@ -91,47 +92,59 @@ function TableSantri() {
                 </tr>
               </thead>
               <tbody>
-                {datas.map((data, index) => (
-                  <tr className="bg-white border-b" key={data._id}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {index + 1}
-                    </td>
-                    <td className="text-base text-left text-gray-900 font-light px-6 py-4 whitespace-nowrap uppercase">
-                      {data.name}
-                    </td>
-                    <td className="text-base text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      <span className="w-8 h-8 rounded-full grid place-items-center bg-yellow-200 text-yellow-500 font-semibold">
-                        {data.halaqoh}
-                      </span>
-                    </td>
-                    <td className="text-base text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      {data.asal}
-                    </td>
-                    <td className="text-base flex gap-2 text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                      <button
-                        onClick={() => onOpenEditModal(data._id)}
-                        className="bg-sky-200 rounded w-9 h-9 grid place-items-center text-white text-sm uppercase font-medium"
-                      >
-                        <HiPencil size={20} className="text-sky-500" />
-                      </button>
-                      <button
-                        onClick={() => onDelete(data._id)}
-                        className="bg-red-200 rounded w-9 h-9 grid place-items-center text-white text-sm uppercase font-medium"
-                      >
-                        <HiTrash size={20} className="text-red-500" />
-                      </button>
-                      <NavLink
-                        to={`/santri/hfiz/${data._id}`}
-                        className="bg-green-200 rounded w-9 h-9 grid place-items-center text-white text-sm uppercase font-medium"
-                      >
-                        <HiArrowRightCircle
-                          size={24}
-                          className="text-green-500"
-                        />
-                      </NavLink>
+                {datas.length ? (
+                  datas.map((data, index) => (
+                    <tr className="bg-white border-b" key={data._id}>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        {index + 1}
+                      </td>
+                      <td className="text-base text-left text-gray-900 font-light px-6 py-4 whitespace-nowrap uppercase">
+                        {data.name}
+                      </td>
+                      <td className="text-base text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        <span className="w-8 h-8 rounded-full grid place-items-center bg-yellow-200 text-yellow-500 font-semibold">
+                          {data.halaqoh}
+                        </span>
+                      </td>
+                      <td className="text-base text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        {data.asal}
+                      </td>
+                      <td className="text-base flex gap-2 text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        <button
+                          onClick={() => onOpenEditModal(data._id)}
+                          className="bg-sky-200 rounded w-9 h-9 grid place-items-center text-white text-sm uppercase font-medium"
+                        >
+                          <HiPencil size={20} className="text-sky-500" />
+                        </button>
+                        <button
+                          onClick={() => onDelete(data._id)}
+                          className="bg-red-200 rounded w-9 h-9 grid place-items-center text-white text-sm uppercase font-medium"
+                        >
+                          <HiTrash size={20} className="text-red-500" />
+                        </button>
+                        <NavLink
+                          to={`/santri/hfiz/${data._id}`}
+                          className="bg-green-200 rounded w-9 h-9 grid place-items-center text-white text-sm uppercase font-medium"
+                        >
+                          <HiArrowRightCircle
+                            size={24}
+                            className="text-green-500"
+                          />
+                        </NavLink>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr className="h-48 w-full bg-white">
+                    <td rowSpan={10} colSpan={9} className="text-center">
+                      <img
+                        src={Spinner}
+                        alt="spinner"
+                        className="inline-block"
+                      />
                     </td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
           </div>
