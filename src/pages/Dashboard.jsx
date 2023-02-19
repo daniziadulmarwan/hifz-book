@@ -1,10 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import { HiOutlineHome, HiOutlineUsers } from "react-icons/hi2";
+import { axiosJwt } from "../config/api";
 
 export default function Dashboard() {
   const [openSidebar, setOpenSidebar] = useState(false);
+  const [totalSantri, setTotalSantri] = useState(0);
+
+  const getTotlaSantri = () => {
+    axiosJwt.get("/santri/getAllSantri").then((res) => {
+      setTotalSantri(res.data.data.length);
+    });
+  };
+
+  useEffect(() => {
+    getTotlaSantri();
+  }, []);
 
   return (
     <div className="w-full overflow-x-hidden flex overflow-y-hidden">
@@ -39,7 +51,7 @@ export default function Dashboard() {
               </div>
               <div className="ml-3">
                 <h1 className="text-2xl text-slate-900">Jumlah Santri</h1>
-                <p>15</p>
+                <p>{totalSantri}</p>
               </div>
             </div>
 

@@ -3,7 +3,7 @@ import {
   HiPencilSquare,
   HiCog6Tooth,
   HiUserGroup,
-  HiLockClosed,
+  // HiLockClosed,
 } from "react-icons/hi2";
 import { NavLink, useHref } from "react-router-dom";
 import LogoutModal from "../LogoutModal";
@@ -60,7 +60,7 @@ function Sidebar({ openSidebar }) {
               Setting
             </NavLink>
           </li>
-          <li className="grid place-items-center">
+          {/* <li className="grid place-items-center">
             <button
               onClick={() => setOpenLogoutModal(!openLogoutModal)}
               className="text-sm uppercase flex text-white flex-col items-center"
@@ -68,7 +68,7 @@ function Sidebar({ openSidebar }) {
               <HiLockClosed size={36} className="text-white" />
               Signout
             </button>
-          </li>
+          </li> */}
         </ul>
       </div>
       <LogoutModal

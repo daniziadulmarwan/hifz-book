@@ -3,7 +3,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import jwtDecode from "jwt-decode";
 import { confirmAlert } from "react-confirm-alert";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -55,28 +55,15 @@ export default function Dropdown() {
           <div className="py-1">
             <Menu.Item>
               {({ active }) => (
-                <a
-                  href="#!"
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-xs lg:text-sm uppercase"
-                  )}
-                >
-                  Profile
-                </a>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="#!"
+                <Link
+                  to="/setting"
                   className={classNames(
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                     "block px-4 py-2 text-xs lg:text-sm uppercase"
                   )}
                 >
                   Setting
-                </a>
+                </Link>
               )}
             </Menu.Item>
             <Menu.Item>
