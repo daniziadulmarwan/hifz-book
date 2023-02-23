@@ -96,7 +96,7 @@ function TableSabaq({ santri_id }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {datas.length ? (
+                  {datas ? (
                     datas.map((data, index) => (
                       <tr className="bg-white border-b" key={data._id}>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
