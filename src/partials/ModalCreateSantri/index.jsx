@@ -3,6 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { HiOutlineXMark } from "react-icons/hi2";
 import { axiosJwt } from "../../config/api";
 import { toast } from "react-toastify";
+import { mutate } from "swr";
 
 function ModalCreateSantri({ openCreateModal, setOpenCreateModal }) {
   const [name, setName] = useState("");
@@ -23,12 +24,13 @@ function ModalCreateSantri({ openCreateModal, setOpenCreateModal }) {
         setLoading(false);
         setOpenCreateModal(false);
         setTimeout(() => {
-          window.location.reload();
+          mutate("allSantri");
         }, 2000);
       })
       .catch((err) => {
         toast(err.message);
         setLoading(false);
+        setOpenCreateModal(false);
       });
   };
 
