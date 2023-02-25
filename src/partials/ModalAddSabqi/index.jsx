@@ -26,7 +26,7 @@ function ModalAddSabqi({ santri_id, openModalAddSabqi, setOpenModalAddSabqi }) {
   };
 
   const getSurahAPI = () => {
-    axiosJwt.get("/sabaq/getAllSabaq").then((res) => {
+    axiosJwt.get(`/sabaq/getAllSabaqBySantriId/${santri_id}`).then((res) => {
       let newSurah = res.data.data.map((data) => {
         return data.surah;
       });
@@ -35,7 +35,7 @@ function ModalAddSabqi({ santri_id, openModalAddSabqi, setOpenModalAddSabqi }) {
   };
 
   const getJuzAPI = () => {
-    axiosJwt.get("/sabaq/getAllSabaq").then((res) => {
+    axiosJwt.get(`/sabaq/getAllSabaqBySantriId/${santri_id}`).then((res) => {
       let newJuz = res.data.data.map((data) => {
         return data.juz;
       });
