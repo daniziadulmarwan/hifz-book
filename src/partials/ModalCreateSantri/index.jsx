@@ -17,7 +17,7 @@ function ModalCreateSantri({ openCreateModal, setOpenCreateModal }) {
     axiosJwt
       .post("/santri/createSantri", { name, halaqoh, asal })
       .then((res) => {
-        toast.success(res.data.msg, { autoClose: 2000 });
+        toast.success(res.data.msg, { autoClose: 1000 });
         setName("");
         setHalaqoh("");
         setAsal("");
@@ -25,7 +25,7 @@ function ModalCreateSantri({ openCreateModal, setOpenCreateModal }) {
         setOpenCreateModal(false);
         setTimeout(() => {
           mutate("allSantri");
-        }, 2000);
+        }, 1000);
       })
       .catch((err) => {
         toast(err.message);

@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { axiosJwt } from "../../config/api";
 import { toast } from "react-toastify";
+import { mutate } from "swr";
 
 function ModalAddSabaq({ santri_id, openModalAddSabaq, setOpenModalAddSabaq }) {
   const [juz, setJuz] = useState([]);
@@ -68,6 +69,9 @@ function ModalAddSabaq({ santri_id, openModalAddSabaq, setOpenModalAddSabaq }) {
         toast.success(res.data.msg, { autoClose: 1000 });
         setOpenModalAddSabaq(false);
         clearForm();
+        setTimeout(() => {
+          mutate("sabaq");
+        }, 1000);
       })
       .catch((err) => {
         toast.success(err.message, { autoClose: 1000 });
