@@ -55,6 +55,7 @@ function ModalAddSabqi({ santri_id, openModalAddSabqi, setOpenModalAddSabqi }) {
     getSurahAPI();
     getJuzAPI();
     fillPageJuzWithNumber();
+    // eslint-disable-next-line
   }, []);
 
   const onSubmit = () => {
