@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { HiOutlineXMark } from "react-icons/hi2";
@@ -22,7 +23,7 @@ function ModalAddManzil({
   };
 
   const getJuzAPI = () => {
-    axiosJwt.get("/sabaq/getAllSabaq").then((res) => {
+    axiosJwt.get(`/sabaq/getAllSabaqBySantriId/${santri_id}`).then((res) => {
       let newJuz = res.data.data.map((data) => {
         return data.juz;
       });
