@@ -202,7 +202,7 @@ function ModalAddSabqi({ santri_id, openModalAddSabqi, setOpenModalAddSabqi }) {
                         Halaman Qur'an
                       </label>
                       <input
-                        type="number"
+                        type="text"
                         autoComplete="off"
                         className="form-control"
                         id="asal"
