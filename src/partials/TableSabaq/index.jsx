@@ -71,6 +71,7 @@ function TableSabaq({ santri_id }) {
       </div>
     );
   }
+  console.log(data);
 
   return (
     <>
